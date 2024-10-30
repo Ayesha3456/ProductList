@@ -8,6 +8,8 @@ def home(request):
     return render(request, 'nextpage.html', {'prods': prod1, 'action': 'create'})
 
 def create_task(request):
+    all_products = Product.objects.all()
+
     if request.method == 'POST':
         # Create new product
         name = request.POST.get('pname')
@@ -19,10 +21,11 @@ def create_task(request):
         prod.save()
         return redirect('home')
     
-    return render(request, 'nextpage.html', {'action': 'create'})
+    return render(request, 'nextpage.html', {'action': 'create', 'prods': all_products})
 
 def update_product(request, pk):
     product = get_object_or_404(Product, id=pk)
+    all_products = Product.objects.all()
 
     if request.method == 'POST':
         # Update product details
@@ -32,13 +35,14 @@ def update_product(request, pk):
         product.save()
         return redirect('home')
 
-    return render(request, 'nextpage.html', {'product': product, 'action': 'update'})
+    return render(request, 'nextpage.html', {'product': product, 'action': 'update','prods': all_products})
 
 def delete_product(request, pk):
     product = get_object_or_404(Product, id=pk)
+    all_products = Product.objects.all()
     
     if request.method == 'POST':
         product.delete()
         return redirect('home')
 
-    return render(request, 'nextpage.html', {'product': product, 'action': 'delete'})
+    return render(request, 'nextpage.html', {'product': product, 'action': 'delete', 'prods': all_products})
