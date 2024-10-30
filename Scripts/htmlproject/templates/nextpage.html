@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +13,17 @@
             display: flex;
             justify-content: center;
         }
+        .logo {
+            display: block;
+            margin: 0 auto;
+            width: 100px; /* Adjust size as needed */
+        }
     </style>
 </head>
 <body>
+    <div class="text-center">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo my-4">
+    </div>
     <h1 class="text-center mb-3">Product List</h1>
     <table class="table table-striped table-bordered">
         <tr>
